@@ -602,20 +602,16 @@ const DEFAULT_MILESTONES = [
 ];
 
 /* ============================================================
-   PERSISTENCIA (window.storage con respaldo en memoria)
+   PERSISTENCIA (localStorage — funciona en GitHub Pages)
 ============================================================ */
-let storageOK = true;
+const STORAGE_KEY = 'bitacora-luis-2026';
 
-async function loadState(){
-  let loaded = false;
+function loadState(){
   try{
-    if(window.storage && typeof window.storage.get==='function'){
-      const res = await window.storage.get('dashboard-state');
-      if(res && res.value){ state = JSON.parse(res.value); loaded = true; }
-    } else { storageOK = false; }
-  } catch(e){ storageOK = false; }
-
-  if(!loaded) state.milestones = DEFAULT_MILESTONES;
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ state = JSON.parse(raw); }
+    else { state.milestones = DEFAULT_MILESTONES; }
+  } catch(e){ state.milestones = DEFAULT_MILESTONES; }
 
   const today = isoDate(new Date());
   if(state.checklistDate !== today){
@@ -631,21 +627,22 @@ async function loadState(){
   if(!state.checklist||state.checklist.length===0)
     state.checklist = DEFAULT_CHECKLIST.map(c=>({...c,done:false}));
 
-  await saveState();
+  saveState();
   renderStorageBadge();
 }
 
-async function saveState(){
-  if(!storageOK) return;
-  try{
-    const r = await window.storage.set('dashboard-state',JSON.stringify(state));
-    if(!r){ storageOK=false; renderStorageBadge(); }
-  } catch(e){ storageOK=false; renderStorageBadge(); }
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
 }
 
 function renderStorageBadge(){
   const el=document.getElementById('storageBadge');
-  if(el) el.style.display = storageOK ? 'none' : 'block';
+  if(!el) return;
+  try{
+    localStorage.setItem('_test','1');
+    localStorage.removeItem('_test');
+    el.style.display='none';
+  } catch(e){ el.style.display='block'; }
 }
 
 /* ============================================================
@@ -727,7 +724,7 @@ function renderChecklist(){
     cb.addEventListener('click',async()=>{
       const item=state.checklist.find(c=>c.id===cb.dataset.id);
       item.done=!item.done;
-      await saveState();
+      saveState();
       renderChecklist();
       renderHeader();
       updateContextLabel(); // actualizar lo que el agente "sabe"
@@ -835,7 +832,7 @@ document.getElementById('m-save').addEventListener('click',async()=>{
   const tag=document.getElementById('m-tag').value;
   if(!title||!date) return;
   state.milestones.push({id:'ms_'+Date.now(),title,date,tag});
-  await saveState();
+  saveState();
   modalBg.classList.remove('show');
   renderRadar();
   renderUpcoming();
@@ -1104,7 +1101,7 @@ document.getElementById('resetKeyLink').addEventListener('click',()=>{
    INIT
 ============================================================ */
 async function init(){
-  await loadState();
+  loadState();
   renderHeader();
   renderRadar();
   renderUpcoming();
