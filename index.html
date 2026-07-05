@@ -964,7 +964,7 @@ async function callGemini(userText){
     contents: [...systemTurn, ...chatHistory],
     generationConfig:{
       temperature:0.75,
-      maxOutputTokens:600,
+      maxOutputTokens:1500,
       topK:40,
       topP:0.95
     }
