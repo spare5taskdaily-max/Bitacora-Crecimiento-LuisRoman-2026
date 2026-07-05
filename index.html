@@ -869,7 +869,7 @@ function getSystemPrompt(){
 
   return `Eres el Mentor IA personal de Luis, integrado en su Panel de Bitácora de Crecimiento 2026.
 
-Tu rol es ser un mentor directo, motivador y estratégico. Hablas en español latinoamericano. Eres conciso (máximo 3 párrafos cortos por respuesta), práctico y personalizas cada respuesta con el contexto real del panel de Luis.
+Tu rol es ser un mentor directo, motivador y estratégico. Hablas en español latinoamericano. Eres conciso (máximo 4 párrafos, SIEMPRE termina la idea completa antes de detenerte, NUNCA cortes una oración a la mitad), práctico y personalizas cada respuesta con el contexto real del panel de Luis.
 
 CONTEXTO ACTUAL DEL PANEL (hoy: ${today}):
 - Racha de días consecutivos completando checklist: ${state.streak||0} días
@@ -964,7 +964,7 @@ async function callGemini(userText){
     contents: [...systemTurn, ...chatHistory],
     generationConfig:{
       temperature:0.75,
-      maxOutputTokens:1500,
+      maxOutputTokens:2048,
       topK:40,
       topP:0.95
     }
