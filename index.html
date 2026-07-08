@@ -239,6 +239,85 @@ a{color:var(--sky);}
 .btn-cancel{background:var(--surface-2);color:var(--text-dim);}
 .btn-save{background:var(--amber);color:#0B1220;}
 
+
+/* ROUTE OVERLAY — estado vinculado a cursos */
+.route-overlay{
+  padding:10px 14px;border-radius:9px;margin-bottom:12px;
+  font-size:12px;font-weight:500;text-align:center;line-height:1.5;
+}
+.route-overlay.paused{background:rgba(242,166,90,0.12);border:1px solid rgba(242,166,90,0.3);color:var(--amber);}
+.route-overlay.projected{background:rgba(91,163,217,0.12);border:1px solid rgba(91,163,217,0.3);color:var(--sky);}
+.route-overlay.pending{background:rgba(224,85,107,0.12);border:1px solid rgba(224,85,107,0.3);color:var(--rose);}
+.route-overlay.done{background:rgba(95,184,156,0.12);border:1px solid rgba(95,184,156,0.3);color:var(--mint);}
+.route-dimmed .level-item:not(:first-child){opacity:0.3;pointer-events:none;}
+.route-dimmed .level-item:first-child{opacity:0.5;}
+.route-tab-badge{font-size:9px;display:block;margin-top:2px;font-weight:400;opacity:0.8;}
+/* ROUTE TABS mejorados */
+
+/* Panel generico de curso */
+.generic-course-panel{
+  background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:16px;
+}
+.generic-course-panel .gc-title{font-size:15px;font-weight:600;margin-bottom:4px;}
+.generic-course-panel .gc-platform{font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:12px;}
+.generic-course-panel .gc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.generic-course-panel .gc-stat .k{font-size:9.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:2px;}
+.generic-course-panel .gc-stat .v{font-size:12px;font-weight:500;}
+.generic-course-panel .gc-notes{font-size:12px;color:var(--text-dim);margin-top:12px;padding-top:10px;border-top:1px solid var(--line);line-height:1.5;}
+
+/* FASES DE CURSO */
+.course-phases-bar{height:5px;background:var(--surface-2);border-radius:3px;margin-top:10px;overflow:hidden;}
+.course-phases-bar > div{height:100%;background:var(--mint);border-radius:3px;transition:width .4s;}
+.course-phases-label{font-size:9.5px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-top:4px;}
+.phase-modal-list{display:flex;flex-direction:column;gap:6px;margin:10px 0;max-height:320px;overflow-y:auto;}
+.phase-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+}
+.phase-check{
+  width:22px;height:22px;border-radius:6px;border:1.5px solid var(--text-dim);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .15s;background:transparent;
+}
+.phase-check.done{background:var(--mint);border-color:var(--mint);}
+.phase-check svg{width:12px;height:12px;opacity:0;transition:opacity .1s;}
+.phase-check.done svg{opacity:1;}
+.phase-info{flex:1;min-width:0;}
+.phase-name{font-size:12.5px;font-weight:500;}
+.phase-name.done{text-decoration:line-through;color:var(--text-dim);}
+.phase-date{font-size:10px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.phase-del{font-size:10px;color:var(--text-dim);cursor:pointer;padding:4px;border-radius:5px;}
+.phase-del:hover{color:var(--rose);}
+.add-phase-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.add-phase-row input{flex:1;min-width:120px;background:var(--surface-2);border:1px solid var(--line);
+  color:var(--text);padding:8px 10px;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;}
+.add-phase-row input[type=date]{flex:0 0 auto;width:140px;}
+.btn-add-phase{padding:8px 14px;border-radius:8px;border:none;background:var(--violet);
+  color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;}
+.phase-progress-header{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;
+  margin-bottom:6px;
+}
+.phase-empty{text-align:center;padding:16px;color:var(--text-dim);font-size:12px;line-height:1.6;}
+.no-active-courses{
+  text-align:center;padding:24px 16px;color:var(--text-dim);font-size:12px;
+  border:1px dashed var(--line);border-radius:13px;line-height:1.7;
+}
+.route-tab{flex:0 0 auto;min-width:120px;max-width:180px;}
+.route-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;}
+.route-tab-name{display:block;font-size:12px;font-weight:600;}
+.route-tab-badge{display:block;font-size:9px;font-weight:400;margin-top:1px;min-height:12px;opacity:0.85;}
+.route-tab.route-activo-secundario{
+  background:rgba(95,184,156,0.08);border-color:rgba(95,184,156,0.35);color:var(--mint);
+}
+.route-tab.route-activo-secundario .route-tab-badge{color:var(--mint);}
+.route-activos-counter{
+  font-size:10px;color:var(--mint);font-family:'JetBrains Mono',monospace;
+  background:rgba(95,184,156,0.1);border:1px solid rgba(95,184,156,0.25);
+  padding:2px 8px;border-radius:20px;
+}
+
 .footnote{font-size:10.5px;color:var(--text-dim);text-align:center;margin-top:30px;line-height:1.6;font-family:'JetBrains Mono',monospace;}
 </style>
 </head>
@@ -284,7 +363,7 @@ a{color:var(--sky);}
   <button class="add-btn" id="openModalBtn">+ Anadir hito o fecha limite</button>
 
   <!-- CHECKLIST -->
-  <div class="section-head"><div><div class="eyebrow">Hoy 2-4h disponibles</div><h2>Checklist diario</h2></div></div>
+  <div class="section-head"><div><div class="eyebrow">Generado desde tus cursos activos</div><h2>Checklist diario</h2></div></div>
   <div class="card">
     <div id="checklistContainer"></div>
     <div class="progress-bar-mini"><div id="checklistBar" style="width:0%"></div></div>
@@ -325,11 +404,12 @@ a{color:var(--sky);}
   <div id="coursesContainer"></div>
 
   <!-- RUTAS -->
-  <div class="section-head"><div><div class="eyebrow">Tus dos caminos</div><h2>Rutas de formacion</h2></div></div>
-  <div class="route-tabs">
-    <div class="route-tab active" data-route="poli">Pregrado Poli</div>
-    <div class="route-tab" data-route="mooc">Roadmap MOOC</div>
+  <div class="section-head">
+    <div><div class="eyebrow">Cursos activos</div><h2>Rutas de formacion</h2></div>
+    <div class="hint" id="rutasActivasHint"></div>
   </div>
+  <div class="route-tabs" id="routeTabs"></div>
+  <div id="routePanelsContainer">
   <div class="route-panel active" id="panel-poli">
     <div class="level-item"><div class="level-top"><div><div class="level-name">Semestres 1-2 Fundamentos</div><div class="level-sub">Calculo, algebra lineal, programacion I, estadistica</div></div><div class="level-status active">En curso</div></div><div class="level-bar amber"><div style="width:35%"></div></div></div>
     <div class="level-item locked"><div class="level-top"><div><div class="level-name">Semestres 3-4 Datos</div><div class="level-sub">No parametrica, multivariada, bases de datos</div></div><div class="level-status pending">Bloqueado</div></div><div class="level-bar"><div style="width:0%"></div></div></div>
@@ -345,6 +425,8 @@ a{color:var(--sky);}
     <div class="level-item locked"><div class="level-top"><div><div class="level-name">Fase 5 (Mes 15-18) AWS Cert</div><div class="level-sub">SageMaker + AWS ML Engineer</div></div><div class="level-status pending">Bloqueado</div></div><div class="level-bar"><div style="width:0%"></div></div></div>
     <p style="font-size:11px;color:var(--text-dim);margin-top:8px;">12-18 meses 100% online compatible con pregrado.</p>
   </div>
+
+  </div><!-- /routePanelsContainer -->
 
   <!-- AGENTE IA -->
   <div class="section-head"><div><div class="eyebrow">Gemini 2.5 Flash Gratuito</div><h2>Mentor IA - Consulta tu plan</h2></div></div>
@@ -382,7 +464,31 @@ a{color:var(--sky);}
   <div class="section-head"><div><div class="eyebrow">Donde estudiar</div><h2>Plataformas recomendadas</h2></div><div class="hint">por reputacion</div></div>
   <div class="card"><div id="platformsList"></div></div>
 
-  <div class="footnote">Agente IA: Gemini 2.5 Flash (Google AI Studio gratuito)<br>Bitacora de Crecimiento 2026</div>
+  <!-- Modal: gestionar fases de un curso -->
+<div class="modal-bg" id="phaseModalBg">
+  <div class="modal">
+    <h3 id="phaseModalTitle">Fases del curso</h3>
+    <input type="hidden" id="pm-courseId">
+    <div class="phase-progress-header">
+      <span id="pm-progress-label">0/0 completadas</span>
+      <span id="pm-pct">0%</span>
+    </div>
+    <div class="course-phases-bar" style="margin-bottom:12px;">
+      <div id="pm-bar" style="width:0%"></div>
+    </div>
+    <div class="phase-modal-list" id="phaseList"></div>
+    <div class="add-phase-row">
+      <input type="text" id="pm-name" placeholder="Nombre de la fase o modulo">
+      <input type="date" id="pm-date">
+      <button class="btn-add-phase" id="pm-add">+ Agregar</button>
+    </div>
+    <div class="modal-actions" style="margin-top:14px;">
+      <button class="btn-save" id="pm-close" style="background:var(--surface-2);color:var(--text);">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="footnote">Agente IA: Gemini 2.5 Flash (Google AI Studio gratuito)<br>Bitacora de Crecimiento 2026</div>
 </div>
 
 <!-- Modal hito -->
@@ -418,6 +524,12 @@ a{color:var(--sky);}
       <option value="paused">En pausa - lo retomo despues</option>
       <option value="done">Completado</option>
     </select>
+    <label>Panel de ruta asociado (opcional)</label>
+    <select id="cm-route">
+      <option value="">Sin panel especifico - mostrar info basica</option>
+      <option value="poli">Pregrado Poli (semestres 1-8)</option>
+      <option value="mooc">Roadmap MOOC (fases 1-5)</option>
+    </select>
     <div id="projectedField" style="display:none">
       <label>Tiempo estimado de inicio</label>
       <select id="cm-projected">
@@ -443,12 +555,37 @@ var DOW=['DOM','LUN','MAR','MIE','JUE','VIE','SAB'];
 
 // ESTADO
 var state = { checklist:[], checklistDate:null, milestones:[], streak:0 };
-var DEFAULT_CHECKLIST = [
-  {id:'c1',label:'Avanzar 1 modulo: Pregrado Poli',time:'60-90 min'},
-  {id:'c2',label:'Avanzar leccion: Roadmap MOOC',time:'45-60 min'},
-  {id:'c3',label:'Repasar / practicar ejercicios',time:'20-30 min'},
-  {id:'c4',label:'Registrar avance del canal YouTube',time:'15 min'}
-];
+// Checklist generado dinamicamente desde cursos activos
+function generarChecklistBase(){
+  var courses = loadCourses();
+  var activos = courses.filter(function(c){ return c.status==='active'; });
+  var items = [];
+
+  // Un item por cada curso activo
+  activos.forEach(function(c, i){
+    var nombre = c.name.length > 30 ? c.name.substring(0,28)+'...' : c.name;
+    items.push({
+      id: 'cc_'+c.id,
+      label: 'Avanzar en: '+nombre,
+      time: '45-60 min',
+      done: false,
+      courseId: c.id
+    });
+  });
+
+  // Items fijos de apoyo (siempre presentes)
+  items.push({id:'cf1', label:'Repasar y practicar lo aprendido', time:'20-30 min', done:false});
+  items.push({id:'cf2', label:'Registrar avance y reflexion del dia', time:'10 min', done:false});
+
+  // Si no hay cursos activos, mostrar mensaje orientador
+  if(activos.length===0){
+    items = [
+      {id:'ce1', label:'Ve a Cursos y activa al menos uno para ver tu checklist personalizado', time:'1 min', done:false}
+    ];
+  }
+
+  return items;
+}
 var DEFAULT_MILESTONES = [
   {id:'ms1',title:'Quiz Calculo Diferencial',date:isoDate(daysFromNow(2)),tag:'poli'},
   {id:'ms2',title:'Entrega Modulo 1 MLOps',date:isoDate(daysFromNow(4)),tag:'ia'},
@@ -456,6 +593,25 @@ var DEFAULT_MILESTONES = [
   {id:'ms4',title:'Parcial Algebra Lineal',date:isoDate(daysFromNow(10)),tag:'poli'},
   {id:'ms5',title:'Curso ISC2 CC Modulo intro',date:isoDate(daysFromNow(12)),tag:'cyber'}
 ];
+
+
+// Sincroniza el checklist con los cursos activos actuales
+// sin perder el estado done de los items existentes
+function sincronizarChecklist(){
+  var base = generarChecklistBase();
+  var existing = Array.isArray(state.checklist) ? state.checklist : [];
+
+  // Mantener done state de items existentes (con guarda defensiva)
+  var nuevoChecklist = base.map(function(item){
+    var found = existing.find(function(e){ return e && e.id === item.id; });
+    return Object.assign({}, item, {done: (found && found.done) ? true : false});
+  });
+
+  state.checklist = nuevoChecklist;
+  saveState();
+  renderChecklist();
+  renderHeader();
+}
 
 // PERSISTENCIA localStorage
 var STORAGE_KEY = 'bitacora-luis-2026';
@@ -474,11 +630,22 @@ function loadState(){
       if(allDone&&state.checklistDate===yesterday){ state.streak=(state.streak||0)+1; }
       else { state.streak=0; }
     }
-    state.checklist=DEFAULT_CHECKLIST.map(function(c){return Object.assign({},c,{done:false});});
+    // Nuevo dia: regenerar desde cursos activos
+    state.checklist = generarChecklistBase();
     state.checklistDate=today;
   }
   if(!state.checklist||state.checklist.length===0){
-    state.checklist=DEFAULT_CHECKLIST.map(function(c){return Object.assign({},c,{done:false});});
+    state.checklist = generarChecklistBase();
+  } else {
+    // Verificar que los items tengan el campo done; si no, regenerar
+    var tieneFormatoNuevo = state.checklist.every(function(c){ return c && typeof c.done !== 'undefined'; });
+    if(!tieneFormatoNuevo){
+      state.checklist = generarChecklistBase();
+    } else {
+      // Sincronizar con cursos activos actuales
+      sincronizarChecklist();
+      return; // sincronizarChecklist ya llama saveState y render
+    }
   }
   saveState();
   renderStorageBadge();
@@ -505,55 +672,12 @@ function renderHeader(){
 }
 
 // RADAR
-function renderRadar(){
-  var track=document.getElementById('radarTrack');
-  track.innerHTML='';
-  var todayIso=isoDate(new Date());
-  for(var i=0;i<14;i++){
-    var d=daysFromNow(i);
-    var iso=isoDate(d);
-    var dayMs=state.milestones.filter(function(m){return m.date===iso;});
-    var col=document.createElement('div');
-    col.className='radar-day'+(iso===todayIso?' is-today':'');
-    var stack=document.createElement('div');
-    stack.className='blip-stack';
-    dayMs.forEach(function(m){
-      var b=document.createElement('div');
-      b.className='blip b-'+(m.tag||'otro');
-      b.title=m.title;
-      stack.appendChild(b);
-    });
-    col.innerHTML='<span class="dow">'+DOW[d.getDay()]+'</span><span class="dnum">'+d.getDate()+'</span>';
-    col.appendChild(stack);
-    var axis=document.createElement('div');
-    axis.className='dot-axis';
-    col.appendChild(axis);
-    track.appendChild(col);
-  }
-}
+// renderRadar redefinida mas abajo con soporte de hitos de fases
 
 // UPCOMING
 function tagLabel(tag){ return {poli:'Poli',ia:'IA/ML',cloud:'Cloud',cyber:'Cyber',otro:'Otro'}[tag]||'Otro'; }
 
-function renderUpcoming(){
-  var list=document.getElementById('upcomingList');
-  list.innerHTML='';
-  var todayIso=isoDate(new Date());
-  var sorted=state.milestones.filter(function(m){return m.date>=todayIso;}).sort(function(a,b){return a.date.localeCompare(b.date);}).slice(0,6);
-  if(!sorted.length){
-    list.innerHTML='<div class="card" style="text-align:center;color:var(--text-dim);font-size:12px;">No hay hitos. Anade uno abajo.</div>';
-    return;
-  }
-  sorted.forEach(function(m){
-    var d=new Date(m.date+'T00:00:00');
-    var diff=Math.round((d-new Date(new Date().toDateString()))/86400000);
-    var el=document.createElement('div');
-    el.className='milestone tag-'+(m.tag||'otro');
-    el.innerHTML='<div><div class="m-title">'+m.title+'</div><div class="m-meta">'+tagLabel(m.tag)+'</div></div>'
-      +'<div class="m-date'+(diff<=2?' soon':'')+'">'+( diff===0?'HOY':diff===1?'MANANA':diff+' dias')+'</div>';
-    list.appendChild(el);
-  });
-}
+// renderUpcoming redefinida mas abajo con soporte de hitos de fases
 
 // CHECKLIST
 function renderChecklist(){
@@ -562,9 +686,11 @@ function renderChecklist(){
   state.checklist.forEach(function(item){
     var row=document.createElement('div');
     row.className='check-row';
+    // Color sutil si viene de un curso especifico
+    var colorBar = item.courseId ? 'border-left:2px solid var(--mint);padding-left:8px;' : '';
     row.innerHTML='<div class="checkbox '+(item.done?'checked':'')+'" data-id="'+item.id+'">'
       +'<svg viewBox="0 0 24 24" fill="none" stroke="#0B1220" stroke-width="3"><path d="M5 12l5 5L19 7"/></svg></div>'
-      +'<div class="check-label '+(item.done?'done':'')+'">'+item.label+'</div>'
+      +'<div class="check-label '+(item.done?'done':'')+'" style="'+colorBar+'">'+item.label+'</div>'
       +'<div class="check-time">'+item.time+'</div>';
     container.appendChild(row);
   });
@@ -585,14 +711,7 @@ function renderChecklist(){
 }
 
 // TABS RUTAS
-document.querySelectorAll('.route-tab').forEach(function(tab){
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.route-tab').forEach(function(t){t.classList.remove('active');});
-    document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active');});
-    tab.classList.add('active');
-    document.getElementById('panel-'+tab.dataset.route).classList.add('active');
-  });
-});
+// Tabs de rutas generados dinamicamente en renderRoutes()
 
 // CRONOMETRO
 var timerInterval=null;
@@ -668,14 +787,33 @@ var STATUS_LABEL={active:'En curso',pending:'Pendiente',projected:'Proyectado',p
 var STATUS_BADGE={active:'badge-active',pending:'badge-pending',projected:'badge-projected',paused:'badge-paused',done:'badge-done'};
 var STATUS_CYCLE=['active','pending','projected','paused','done'];
 var DEFAULT_COURSES=[
-  {id:'cr1',name:'MLOps Specialization',platform:'DeepLearning.AI / Coursera',status:'active',date:'2026-07-01',notes:'Fase 1 del Roadmap MOOC',projected:''},
-  {id:'cr2',name:'Pregrado Ciencia de Datos - Poli',platform:'Politecnico',status:'paused',date:'2026-02-01',notes:'En pausa - retomar cuando defina fecha',projected:''},
-  {id:'cr3',name:'Azure ML Fundamentals',platform:'Microsoft Learn',status:'projected',date:'2026-08-01',notes:'Gratis 100% online',projected:'En 2 meses'},
+  {id:'cr1',name:'MLOps Specialization',platform:'DeepLearning.AI / Coursera',status:'active',date:'2026-07-01',notes:'Fase 1 del Roadmap MOOC',projected:'',route:'mooc',phases:[{id:'ph1a',name:'Introduccion a MLOps',dueDate:'2026-07-10',done:true},{id:'ph1b',name:'Pipelines de datos',dueDate:'2026-07-20',done:false},{id:'ph1c',name:'Despliegue de modelos',dueDate:'2026-07-31',done:false}]},
+  {id:'cr2',name:'Pregrado Ciencia de Datos - Poli',platform:'Politecnico',status:'paused',date:'2026-02-01',notes:'En pausa - retomar cuando defina fecha',projected:'',route:'poli',phases:[]},
+  {id:'cr3',name:'Azure ML Fundamentals',platform:'Microsoft Learn',status:'projected',date:'2026-08-01',notes:'Gratis 100% online',projected:'En 2 meses',route:'mooc',phases:[]},
 ];
 var courseFilter='all';
 
 function loadCourses(){
-  try{ var raw=localStorage.getItem('courses-luis-2026'); return raw?JSON.parse(raw):DEFAULT_COURSES; }
+  try{
+    var raw=localStorage.getItem('courses-luis-2026');
+    if(!raw) return DEFAULT_COURSES;
+    var courses=JSON.parse(raw);
+    // Migrar: añadir campos faltantes
+    var changed=false;
+    courses.forEach(function(c){
+      if(!Array.isArray(c.phases)){ c.phases=[]; changed=true; }
+      if(c.route===undefined){
+        if(c.name&&c.name.toLowerCase().includes('poli')) c.route='poli';
+        else if(c.id==='cr2') c.route='poli';
+        else if(c.name&&(c.name.toLowerCase().includes('mlops')||c.name.toLowerCase().includes('deeplearning'))) c.route='mooc';
+        else if(c.id==='cr1') c.route='mooc';
+        else c.route='';
+        changed=true;
+      }
+    });
+    if(changed) localStorage.setItem('courses-luis-2026',JSON.stringify(courses));
+    return courses;
+  }
   catch(e){ return DEFAULT_COURSES; }
 }
 function saveCourses(courses){
@@ -698,15 +836,26 @@ function renderCourses(){
     if(c.date) meta+='<span>Inicio: '+c.date+'</span>';
     if(c.projected) meta+='<span>'+c.projected+'</span>';
     if(c.notes) meta+='<span>'+c.notes+'</span>';
+        var phases=Array.isArray(c.phases)?c.phases.filter(function(p){return p!=null;}):[];
+    var pDone=phases.filter(function(p){return p&&p.done;}).length;
+    var pTotal=phases.length;
+    var pPct=pTotal>0?Math.round((pDone/pTotal)*100):0;
+    var cid=c.id;
+    var phBar=pTotal>0
+      ?('<div class="course-phases-bar"><div style="width:'+pPct+'%"></div></div>'
+       +'<div class="course-phases-label">'+pDone+'/'+pTotal+' fases &middot; '+pPct+'%</div>')
+      :'<div class="course-phases-label">Sin fases definidas</div>';
+    var actBtns='<div class="course-actions">'
+      +'<button class="course-act-btn" style="color:var(--violet);border-color:var(--violet);" onclick="openPhaseModal(&quot;'+cid+'&quot;)">Fases ('+pTotal+')</button>'
+      +' <button class="course-act-btn" onclick="openCourseModal(&quot;'+cid+'&quot;)">Editar</button>'
+      +' <button class="course-act-btn" onclick="cycleCourseStatus(&quot;'+cid+'&quot;)">Estado</button>'
+      +' <button class="course-act-btn del" onclick="deleteCourse(&quot;'+cid+'&quot;)">Borrar</button>'
+      +'</div>';
     card.innerHTML='<div class="course-top"><div><div class="course-name">'+c.name+'</div>'
       +'<div class="course-platform">'+(c.platform||'')+'</div></div>'
       +'<span class="course-status-badge '+(STATUS_BADGE[c.status]||'badge-paused')+'">'+(STATUS_LABEL[c.status]||c.status)+'</span></div>'
       +'<div class="course-meta">'+meta+'</div>'
-      +'<div class="course-actions">'
-      +'<button class="course-act-btn" onclick="openCourseModal(\''+c.id+'\')">Editar</button>'
-      +' <button class="course-act-btn" onclick="cycleCourseStatus(\''+c.id+'\')">Cambiar estado</button>'
-      +' <button class="course-act-btn del" onclick="deleteCourse(\''+c.id+'\')">Borrar</button>'
-      +'</div>';
+      +phBar+actBtns;
     container.appendChild(card);
   });
 }
@@ -715,12 +864,12 @@ function cycleCourseStatus(id){
   var c=courses.find(function(x){return x.id===id;});
   if(!c) return;
   c.status=STATUS_CYCLE[(STATUS_CYCLE.indexOf(c.status)+1)%STATUS_CYCLE.length];
-  saveCourses(courses); renderCourses();
+  saveCourses(courses); sincronizarChecklist(); renderCourses(); renderRoutes(false);
 }
 function deleteCourse(id){
   if(!confirm('Borrar este curso?')) return;
   saveCourses(loadCourses().filter(function(x){return x.id!==id;}));
-  renderCourses();
+  sincronizarChecklist(); renderChecklist(); renderCourses(); renderRoutes(false);
 }
 function toggleProjectedField(val){
   var f=document.getElementById('projectedField');
@@ -737,6 +886,8 @@ function openCourseModal(id){
   document.getElementById('cm-notes').value=c?(c.notes||''):'';
   var proj=document.getElementById('cm-projected');
   if(proj) proj.value=(c&&c.projected)?c.projected:'En 1 mes';
+  var routeSel=document.getElementById('cm-route');
+  if(routeSel) routeSel.value=c?(c.route||''):'';
   toggleProjectedField(c?c.status:'active');
   document.getElementById('courseModalBg').classList.add('show');
 }
@@ -753,9 +904,9 @@ function saveCourse(){
     var c=courses.find(function(x){return x.id===eid;});
     if(c){ c.name=name; c.platform=document.getElementById('cm-platform').value.trim(); c.status=sv; c.date=document.getElementById('cm-date').value; c.notes=document.getElementById('cm-notes').value.trim(); c.projected=proj; }
   } else {
-    courses.push({id:'cr_'+Date.now(),name:name,platform:document.getElementById('cm-platform').value.trim(),status:sv,date:document.getElementById('cm-date').value,notes:document.getElementById('cm-notes').value.trim(),projected:proj});
+    var rsEl=document.getElementById('cm-route'); courses.push({id:'cr_'+Date.now(),name:name,platform:document.getElementById('cm-platform').value.trim(),status:sv,date:document.getElementById('cm-date').value,notes:document.getElementById('cm-notes').value.trim(),projected:proj,route:rsEl?rsEl.value:''});
   }
-  saveCourses(courses); closeCourseModal(); renderCourses();
+  saveCourses(courses); sincronizarChecklist(); closeCourseModal(); renderCourses(); renderRoutes(false);
 }
 document.querySelectorAll('.cf-tab').forEach(function(tab){
   tab.addEventListener('click',function(){
@@ -852,8 +1003,8 @@ var GEMINI_MODEL='gemini-2.5-flash';
 var geminiKey='';
 var chatHistory=[];
 
-function loadKey(){ try{ return sessionStorage.getItem('gemini-key')||''; }catch(e){return '';} }
-function saveKey(k){ try{ sessionStorage.setItem('gemini-key',k); }catch(e){} }
+function loadKey(){ try{ return localStorage.getItem('gemini-key')||''; }catch(e){return '';} }
+function saveKey(k){ try{ localStorage.setItem('gemini-key',k); }catch(e){} }
 
 function getSystemPrompt(){
   var today=new Date().toLocaleDateString('es-CO',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
@@ -973,6 +1124,349 @@ document.getElementById('resetKeyLink').addEventListener('click',function(){
   document.getElementById('keyStatus').textContent='';
 });
 
+
+/* ============================================================
+   RUTAS DINAMICAS — vinculadas a estado de cursos
+============================================================ */
+var ROUTE_OVERLAY_MSG = {
+  paused: 'En pausa - Cambia el estado en "Cursos y habilidades" para reactivar esta ruta.',
+  projected: 'Proyectado - Esta ruta aun no ha iniciado segun tu planificacion.',
+  pending: 'Pendiente - Esta ruta esta en lista de espera.',
+  done: 'Completado - Has terminado esta ruta. Felicitaciones.'
+};
+var ROUTE_STATUS_ICON = {active:'',paused:'Pausa',projected:'Proyect.',pending:'Pendiente',done:'Completado'};
+
+// ============================================================
+//   RUTAS DINAMICAS — generadas desde cursos activos
+// ============================================================
+
+var currentCourseId = null; // curso seleccionado actualmente en rutas
+
+function renderRoutes(fromInit){
+  var courses = loadCourses();
+  var activos = courses.filter(function(c){ return c.status==='active'; });
+
+  var tabsEl = document.getElementById('routeTabs');
+  var hint = document.getElementById('rutasActivasHint');
+  if(!tabsEl) return;
+
+  // Actualizar contador
+  if(hint){
+    if(activos.length>1) hint.innerHTML='<span class="route-activos-counter">'+activos.length+' en curso</span>';
+    else if(activos.length===1) hint.innerHTML='<span class="route-activos-counter">1 en curso</span>';
+    else hint.innerHTML='';
+  }
+
+  // Sin cursos activos
+  if(activos.length===0){
+    tabsEl.innerHTML='';
+    mostrarPanelVacio();
+    return;
+  }
+
+  // Generar tabs dinamicamente
+  tabsEl.innerHTML='';
+  var primerTab = currentCourseId && activos.find(function(c){return c.id===currentCourseId;}) ? currentCourseId : activos[0].id;
+
+  activos.forEach(function(course){
+    var tab = document.createElement('div');
+    var isActive = course.id === primerTab;
+    tab.className = 'route-tab' + (isActive?' active':'');
+    tab.dataset.courseId = course.id;
+    var nombre = course.name.length>22 ? course.name.substring(0,20)+'...' : course.name;
+    tab.innerHTML = '<span class="route-tab-name">'+nombre+'</span>';
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#routeTabs .route-tab').forEach(function(t){t.classList.remove('active');});
+      tab.classList.add('active');
+      currentCourseId = course.id;
+      mostrarPanelCurso(course);
+    });
+    tabsEl.appendChild(tab);
+  });
+
+  // Mostrar panel del curso seleccionado
+  var cursoActual = activos.find(function(c){return c.id===primerTab;})||activos[0];
+  currentCourseId = cursoActual.id;
+  mostrarPanelCurso(cursoActual);
+}
+
+function mostrarPanelVacio(){
+  // Ocultar todos los paneles de ruta
+  document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active');});
+  var generic = document.getElementById('panel-generic');
+  if(!generic){ generic=crearPanelGenerico(); }
+  generic.className='route-panel active';
+  generic.innerHTML='<div class="no-active-courses">No tienes cursos en curso actualmente.<br>Ve a "Cursos y habilidades" y cambia el estado de un curso a <strong>En curso</strong>.</div>';
+}
+
+function mostrarPanelCurso(course){
+  // Ocultar todos los paneles
+  document.querySelectorAll('.route-panel').forEach(function(p){p.classList.remove('active');});
+
+  var route = course.route || detectarRuta(course);
+
+  if(route==='poli'){
+    var panel = document.getElementById('panel-poli');
+    if(panel) panel.classList.add('active');
+  } else if(route==='mooc'){
+    var panel = document.getElementById('panel-mooc');
+    if(panel) panel.classList.add('active');
+  } else {
+    // Panel generico para cursos sin ruta predefinida
+    var generic = document.getElementById('panel-generic');
+    if(!generic){ generic=crearPanelGenerico(); }
+    generic.className='route-panel active';
+    generic.innerHTML = generarHTMLGenerico(course);
+  }
+}
+
+function detectarRuta(course){
+  var n = (course.name||'').toLowerCase();
+  var p = (course.platform||'').toLowerCase();
+  if(n.includes('poli')||p.includes('poli')||p.includes('politecnico')) return 'poli';
+  if(n.includes('mlops')||n.includes('mooc')||n.includes('deeplearning')||n.includes('deep learning')) return 'mooc';
+  return '';
+}
+
+function crearPanelGenerico(){
+  var el = document.createElement('div');
+  el.id='panel-generic';
+  el.className='route-panel';
+  var container = document.getElementById('routePanelsContainer');
+  if(container) container.insertBefore(el, container.firstChild);
+  return el;
+}
+
+function generarHTMLGenerico(course){
+  var STATUS_COLORS={active:'var(--mint)',pending:'var(--rose)',projected:'var(--sky)',paused:'var(--amber)',done:'var(--violet)'};
+  var color = STATUS_COLORS[course.status]||'var(--text-dim)';
+  return '<div class="generic-course-panel">'
+    +'<div class="gc-title">'+course.name+'</div>'
+    +'<div class="gc-platform">'+( course.platform||'Sin plataforma')+'</div>'
+    +'<div class="gc-grid">'
+    +(course.date?'<div class="gc-stat"><span class="k">Fecha inicio</span><span class="v">'+course.date+'</span></div>':'')
+    +(course.projected?'<div class="gc-stat"><span class="k">Estimado</span><span class="v">'+course.projected+'</span></div>':'')
+    +'<div class="gc-stat"><span class="k">Estado</span><span class="v" style="color:'+color+'">'+( {active:'En curso',pending:'Pendiente',projected:'Proyectado',paused:'En pausa',done:'Completado'}[course.status]||course.status)+'</span></div>'
+    +'</div>'
+    +(course.notes?'<div class="gc-notes">'+course.notes+'</div>':'')
+    +'<p style="font-size:10.5px;color:var(--text-dim);margin-top:14px;">Para agregar fases o niveles detallados a este curso, editalo y asignale la ruta "Poli" o "MOOC" segun corresponda.</p>'
+    +'</div>';
+}
+
+// Compatibilidad: actualizarBadgesRutas ya no es necesaria pero la dejamos vacia
+function actualizarBadgesRutas(){ renderRoutes(false); }
+
+
+/* ============================================================
+   GESTION DE FASES
+============================================================ */
+var currentPhasesCourseId = null;
+
+function openPhaseModal(courseId){
+  currentPhasesCourseId = courseId;
+  var courses = loadCourses();
+  var course = courses.find(function(c){return c.id===courseId;});
+  if(!course) return;
+  document.getElementById('phaseModalTitle').textContent = 'Fases: '+course.name;
+  document.getElementById('pm-courseId').value = courseId;
+  document.getElementById('pm-name').value = '';
+  document.getElementById('pm-date').value = '';
+  renderPhaseList(course);
+  document.getElementById('phaseModalBg').classList.add('show');
+}
+
+function renderPhaseList(course){
+  var list = document.getElementById('phaseList');
+  var phases = Array.isArray(course.phases) ? course.phases : [];
+
+  // Actualizar barra de progreso
+  var done = phases.filter(function(p){return p.done;}).length;
+  var total = phases.length;
+  var pct = total>0 ? Math.round((done/total)*100) : 0;
+  document.getElementById('pm-progress-label').textContent = done+'/'+total+' completadas';
+  document.getElementById('pm-pct').textContent = pct+'%';
+  document.getElementById('pm-bar').style.width = pct+'%';
+
+  if(!phases.length){
+    list.innerHTML='<div class="phase-empty">Sin fases aun.<br>Agrega modulos, semanas o entregas con su fecha limite.</div>';
+    return;
+  }
+
+  list.innerHTML='';
+  phases.forEach(function(ph, idx){
+    var item = document.createElement('div');
+    item.className = 'phase-item';
+    var diffTxt = '';
+    if(ph.dueDate && !ph.done){
+      var diff = Math.round((new Date(ph.dueDate+'T00:00:00') - new Date(new Date().toDateString()))/86400000);
+      if(diff===0) diffTxt='HOY';
+      else if(diff===1) diffTxt='Manana';
+      else if(diff<0) diffTxt='Vencido hace '+Math.abs(diff)+' dias';
+      else diffTxt='En '+diff+' dias';
+    }
+    item.innerHTML=
+      '<div class="phase-check '+(ph.done?'done':'')+'" data-phid="'+ph.id+'" data-cid="'+course.id+'">'
+      +'<svg viewBox="0 0 24 24" fill="none" stroke="#0B1220" stroke-width="3"><path d="M5 12l5 5L19 7"/></svg>'
+      +'</div>'
+      +'<div class="phase-info">'
+      +'<div class="phase-name '+(ph.done?'done':'')+'">'+ph.name+'</div>'
+      +(ph.dueDate?'<div class="phase-date">'+(ph.dueDate)+(diffTxt?' · <strong>'+diffTxt+'</strong>':'')+'</div>':'')
+      +'</div>'
+      +'<span class="phase-del" onclick="deletePhase(&quot;'+course.id+'&quot;,&quot;'+ph.id+'&quot;)">✕</span>';
+
+    item.querySelector('.phase-check').addEventListener('click', function(){
+      togglePhase(course.id, ph.id);
+    });
+    list.appendChild(item);
+  });
+}
+
+function togglePhase(courseId, phaseId){
+  var courses = loadCourses();
+  var course = courses.find(function(c){return c.id===courseId;});
+  if(!course||!course.phases) return;
+  var ph = course.phases.find(function(p){return p.id===phaseId;});
+  if(!ph) return;
+  ph.done = !ph.done;
+  saveCourses(courses);
+  renderPhaseList(course);
+  renderCourses(); // Actualizar barra en la card
+  sincronizarHitosFases(); // Actualizar radar
+}
+
+function deletePhase(courseId, phaseId){
+  if(!confirm('Borrar esta fase?')) return;
+  var courses = loadCourses();
+  var course = courses.find(function(c){return c.id===courseId;});
+  if(!course||!course.phases) return;
+  course.phases = course.phases.filter(function(p){return p.id!==phaseId;});
+  saveCourses(courses);
+  renderPhaseList(course);
+  renderCourses();
+  sincronizarHitosFases();
+}
+
+document.getElementById('pm-add').addEventListener('click', function(){
+  var name = document.getElementById('pm-name').value.trim();
+  if(!name) return;
+  var courses = loadCourses();
+  var course = courses.find(function(c){return c.id===currentPhasesCourseId;});
+  if(!course) return;
+  if(!Array.isArray(course.phases)) course.phases=[];
+  course.phases.push({
+    id: 'ph_'+Date.now(),
+    name: name,
+    dueDate: document.getElementById('pm-date').value||'',
+    done: false
+  });
+  saveCourses(courses);
+  document.getElementById('pm-name').value='';
+  document.getElementById('pm-date').value='';
+  renderPhaseList(course);
+  renderCourses();
+  sincronizarHitosFases(); // Si tiene fecha -> aparece en radar
+});
+
+document.getElementById('pm-close').addEventListener('click', function(){
+  document.getElementById('phaseModalBg').classList.remove('show');
+});
+document.getElementById('phaseModalBg').addEventListener('click', function(e){
+  if(e.target===document.getElementById('phaseModalBg'))
+    document.getElementById('phaseModalBg').classList.remove('show');
+});
+
+/* ============================================================
+   HITOS AUTOMATICOS DESDE FASES
+   Las fases con fecha y no completadas se mezclan con state.milestones
+   para el radar y vencimientos — sin duplicar el codigo existente
+============================================================ */
+function obtenerHitosFases(){
+  var courses = loadCourses();
+  var hitos = [];
+  var todayIso = isoDate(new Date());
+  courses.forEach(function(c){
+    if(!Array.isArray(c.phases)) return;
+    c.phases.forEach(function(ph){
+      if(!ph.done && ph.dueDate){
+        // Tag según ruta del curso
+        var tag = c.route==='poli'?'poli':c.route==='mooc'?'ia':'otro';
+        hitos.push({
+          id: 'auto_'+ph.id,
+          title: ph.name + ' · ' + c.name,
+          date: ph.dueDate,
+          tag: tag,
+          auto: true
+        });
+      }
+    });
+  });
+  return hitos;
+}
+
+function sincronizarHitosFases(){
+  // Solo re-renderizar radar y upcoming (los hitos de fases se generan en caliente)
+  renderRadar();
+  renderUpcoming();
+}
+
+// Sobreescribir renderRadar y renderUpcoming para incluir hitos de fases
+var _renderRadarOriginal = renderRadar;
+var _renderUpcomingOriginal = renderUpcoming;
+
+function renderRadar(){
+  var track=document.getElementById('radarTrack');
+  track.innerHTML='';
+  var todayIso=isoDate(new Date());
+  // Combinar hitos manuales + hitos de fases
+  var todosHitos = state.milestones.concat(obtenerHitosFases());
+  for(var i=0;i<14;i++){
+    var d=daysFromNow(i);
+    var iso=isoDate(d);
+    var dayMs=todosHitos.filter(function(m){return m.date===iso;});
+    var col=document.createElement('div');
+    col.className='radar-day'+(iso===todayIso?' is-today':'');
+    var stack=document.createElement('div');
+    stack.className='blip-stack';
+    dayMs.forEach(function(m){
+      var b=document.createElement('div');
+      b.className='blip b-'+(m.tag||'otro');
+      b.title=m.title;
+      stack.appendChild(b);
+    });
+    col.innerHTML='<span class="dow">'+DOW[d.getDay()]+'</span><span class="dnum">'+d.getDate()+'</span>';
+    col.appendChild(stack);
+    var axis=document.createElement('div');
+    axis.className='dot-axis';
+    col.appendChild(axis);
+    track.appendChild(col);
+  }
+}
+
+function renderUpcoming(){
+  var list=document.getElementById('upcomingList');
+  list.innerHTML='';
+  var todayIso=isoDate(new Date());
+  // Combinar hitos manuales + hitos de fases
+  var todosHitos = state.milestones.concat(obtenerHitosFases());
+  var sorted=todosHitos.filter(function(m){return m.date>=todayIso;})
+    .sort(function(a,b){return a.date.localeCompare(b.date);}).slice(0,8);
+  if(!sorted.length){
+    list.innerHTML='<div class="card" style="text-align:center;color:var(--text-dim);font-size:12px;">No hay hitos proximos. Agrega uno manualmente o define fechas en las fases de tus cursos.</div>';
+    return;
+  }
+  sorted.forEach(function(m){
+    var d=new Date(m.date+'T00:00:00');
+    var diff=Math.round((d-new Date(new Date().toDateString()))/86400000);
+    var el=document.createElement('div');
+    el.className='milestone tag-'+(m.tag||'otro');
+    // Indicar si es automatico (de fases)
+    var autoTag = m.auto ? '<span style="font-size:9px;color:var(--violet);"> auto</span>' : '';
+    el.innerHTML='<div><div class="m-title">'+m.title+autoTag+'</div><div class="m-meta">'+tagLabel(m.tag)+'</div></div>'
+      +'<div class="m-date'+(diff<=2?' soon':'')+'">'+( diff===0?'HOY':diff===1?'MANANA':diff+' dias')+'</div>';
+    list.appendChild(el);
+  });
+}
+
 // INIT
 function init(){
   loadState();
@@ -983,6 +1477,7 @@ function init(){
   renderAreas();
   renderPlatforms();
   renderCourses();
+  renderRoutes(true);
   updateTimerDisplay();
   var savedKey=loadKey();
   if(savedKey){
