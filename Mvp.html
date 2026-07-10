@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan MVP — Primeros Clientes · Bitácora IA 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0B1220;
+  --surface: #121B2E;
+  --s2: #16223A;
+  --line: #23304A;
+  --text: #E8EDF5;
+  --dim: #7C8AA3;
+  --amber: #F2A65A;
+  --mint: #5FB89C;
+  --rose: #E0556B;
+  --violet: #8C7CF0;
+  --sky: #5BA3D9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-bottom: 80px;
+}
+h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0B1220 0%, #121B2E 50%, #0d1928 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 48px 24px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%; transform: translateX(-50%);
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(140,124,240,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--violet);
+  border: 1px solid rgba(140,124,240,0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: clamp(24px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero h1 span { color: var(--amber); }
+.hero p {
+  color: var(--dim);
+  font-size: 14px;
+  max-width: 520px;
+  margin: 0 auto 24px;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--surface);
+}
+.hero-stat {
+  flex: 1;
+  min-width: 120px;
+  padding: 14px 10px;
+  border-right: 1px solid var(--line);
+  text-align: center;
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat .n { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--amber); }
+.hero-stat .l { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+
+/* LAYOUT */
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 40px 0 0; }
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px; margin-bottom: 24px;
+}
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--amber);
+}
+.section-head h2 { font-size: 20px; font-weight: 600; margin-top: 3px; }
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; padding: 2px 8px; border-radius: 20px;
+  font-weight: 500; white-space: nowrap;
+}
+.badge-violet { background: rgba(140,124,240,0.15); color: var(--violet); }
+.badge-mint { background: rgba(95,184,156,0.15); color: var(--mint); }
+.badge-amber { background: rgba(242,166,90,0.15); color: var(--amber); }
+.badge-rose { background: rgba(224,85,107,0.15); color: var(--rose); }
+
+/* FILTRO VIDEO */
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.filter-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+.filter-card.yes { border-left: 3px solid var(--mint); }
+.filter-card.no  { border-left: 3px solid var(--rose); opacity: 0.6; }
+.filter-card.adapt { border-left: 3px solid var(--amber); }
+.filter-label {
+  font-size: 9px; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px;
+}
+.filter-card.yes .filter-label { color: var(--mint); }
+.filter-card.no  .filter-label { color: var(--rose); }
+.filter-card.adapt .filter-label { color: var(--amber); }
+.filter-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.filter-card p { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+/* PAIN POINTS */
+.pain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.pain-card {
+  background: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+}
+.pain-quote {
+  font-size: 12px;
+  color: var(--amber);
+  font-style: italic;
+  border-left: 2px solid var(--amber);
+  padding-left: 10px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.pain-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--dim); margin-bottom: 6px;
+}
+.pain-match { font-size: 11px; color: var(--mint); font-weight: 500; }
+
+/* PLAN DE ACCION — FASES */
+.phases { display: flex; flex-direction: column; gap: 0; }
+.phase {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  position: relative;
+}
+.phase:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 39px; top: 52px; bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.phase-num {
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 4px;
+  z-index: 1;
+}
+.phase-circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid var(--violet);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--violet);
+  flex-shrink: 0;
+}
+.phase-content {
+  padding: 0 0 36px 20px;
+}
+.phase-header {
+  display: flex; align-items: flex-start; gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.phase-header h3 { font-size: 16px; font-weight: 600; }
+.phase-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--dim);
+  border: 1px solid var(--line);
+  padding: 2px 8px; border-radius: 20px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.steps { display: flex; flex-direction: column; gap: 10px; }
+.step {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.step-icon {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--s2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.step-body {}
+.step-body strong { font-size: 13px; font-weight: 600; display: block; margin-bottom: 3px; }
+.step-body p { font-size: 11.5px; color: var(--dim); line-height: 1.55; }
+.step-body .prompt-box {
+  margin-top: 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 9px 11px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--mint);
+  line-height: 1.6;
+}
+.step-body .prompt-label {
+  font-size: 9px; font-family: 'JetBrains Mono', monospace;
+  color: var(--violet); text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.pill-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 7px; }
+.pill {
+  font-size: 10px; padding: 2px 8px; border-radius: 20px;
+  background: var(--s2); border: 1px solid var(--line); color: var(--dim);
+}
+.pill.hot { border-color: rgba(95,184,156,0.3); color: var(--mint); }
+.pill.warn { border-color: rgba(242,166,90,0.3); color: var(--amber); }
+
+/* COPY READY */
+.copy-block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.copy-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px;
+  background: var(--s2);
+  border-bottom: 1px solid var(--line);
+}
+.copy-header span { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--dim); }
+.copy-body { padding: 14px; font-size: 12.5px; line-height: 1.7; color: var(--text); }
+.copy-body em { color: var(--amber); font-style: normal; font-weight: 600; }
+
+/* METRICAS */
+.metrics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+}
+.metric-card .m-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px; font-weight: 700; color: var(--amber);
+}
+.metric-card .m-label {
+  font-size: 11px; color: var(--dim); margin-top: 3px; line-height: 1.4;
+}
+.metric-card .m-desc {
+  font-size: 10px; color: var(--dim);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 6px; border-top: 1px solid var(--line); padding-top: 6px;
+}
+
+/* COMPARATIVA MVP */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.compare-table th {
+  background: var(--s2);
+  padding: 10px 14px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.compare-table td {
+  padding: 10px 14px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table .pain { color: var(--rose); }
+.compare-table .win { color: var(--mint); }
+.compare-table .feature { font-weight: 600; }
+
+/* DECISION TREE */
+.decision-box {
+  background: var(--surface);
+  border: 1px solid var(--violet);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+}
+.decision-box h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.decision-box p { font-size: 12px; color: var(--dim); margin-bottom: 16px; }
+.decision-options { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.d-opt {
+  background: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: left;
+  min-width: 200px;
+  flex: 1;
+}
+.d-opt .d-label { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: var(--dim); text-transform: uppercase; margin-bottom: 5px; }
+.d-opt .d-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.d-opt .d-desc { font-size: 11px; color: var(--dim); line-height: 1.5; }
+.d-opt.a { border-color: rgba(95,184,156,0.4); }
+.d-opt.b { border-color: rgba(242,166,90,0.4); }
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 40px 20px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--dim);
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Plan Estratégico · MVP Validación</div>
+  <h1>Primeros <span>Clientes Reales</span><br>para tu Dashboard IA</h1>
+  <p>Plan práctico para demostrar demanda real y conseguir los primeros pagos — sin audiencia, sin presupuesto, desde el celular.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="n">$0</div>
+      <div class="l">presupuesto</div>
+    </div>
+    <div class="hero-stat">
+      <div class="n">21d</div>
+      <div class="l">horizonte</div>
+    </div>
+    <div class="hero-stat">
+      <div class="n">3–5</div>
+      <div class="l">primeros clientes</div>
+    </div>
+    <div class="hero-stat">
+      <div class="n">$19</div>
+      <div class="l">precio arranque</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- FILTRO DEL VIDEO: qué aplica y qué no -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Análisis del video · 13 lecciones filtradas</div>
+      <h2>Qué es relevante para tu MVP</h2>
+    </div>
+    <span class="badge badge-violet">curado para tu caso</span>
+  </div>
+  <div class="filter-grid">
+
+    <div class="filter-card yes">
+      <div class="filter-label">✓ Aplicar ahora</div>
+      <h4>Lección 1 — Research en Reddit primero</h4>
+      <p>Ya tienes el dolor validado: "compro cursos y nunca los termino". Eso es tu hipótesis. Ahora necesitas 5–10 conversaciones reales antes de vender.</p>
+    </div>
+
+    <div class="filter-card yes">
+      <div class="filter-label">✓ Aplicar ahora</div>
+      <h4>Lección 4 — Contenido específico > seguidores</h4>
+      <p>El algoritmo 2026 no requiere audiencia previa. Un reel específico con cero seguidores puede llegar a miles. Tu historia (Samsung A32, cero presupuesto) ES el contenido.</p>
+    </div>
+
+    <div class="filter-card yes">
+      <div class="filter-label">✓ Aplicar ahora</div>
+      <h4>Lección 8 — Dar info gratis, vender implementación</h4>
+      <p>Tu dashboard es la implementación. Los conceptos (racha, checklist, agente IA) son la info gratis. Muestra cómo funciona, vende el sistema listo.</p>
+    </div>
+
+    <div class="filter-card yes">
+      <div class="filter-label">✓ Aplicar ahora</div>
+      <h4>Lección 11 — La oferta aburrida gana</h4>
+      <p>"Dashboard para estudiantes de IA que empiezan 10 cursos y no terminan ninguno" es tu oferta específica. No "herramienta de productividad".</p>
+    </div>
+
+    <div class="filter-card yes">
+      <div class="filter-label">✓ Aplicar ahora</div>
+      <h4>Lección 12 — El DM cierra el 80%</h4>
+      <p>No confíes solo en Gumroad. El primer cliente vendrá de una conversación directa. Identifica 10 personas en Reddit o comunidades que tengan el dolor. Escríbeles.</p>
+    </div>
+
+    <div class="filter-card adapt">
+      <div class="filter-label">⟳ Adaptar</div>
+      <h4>Lección 3 — Instagram como canal</h4>
+      <p>Válido, pero no empieces aquí. Primero valida en Reddit/comunidades donde ya está tu audiencia (r/learnprogramming, grupos de Platzi/Coursera). Instagram en semana 2.</p>
+    </div>
+
+    <div class="filter-card adapt">
+      <div class="filter-label">⟳ Adaptar</div>
+      <h4>Lección 5 — Prueba > promesas</h4>
+      <p>No tienes testimonios aún. Tu prueba es el proceso: muestra el dashboard funcionando en tu celular en tiempo real. El "built in public" es tu prueba.</p>
+    </div>
+
+    <div class="filter-card no">
+      <div class="filter-label">✗ No aplica aún</div>
+      <h4>Lección 10 — Escalera de precios</h4>
+      <p>Construir upsells y backend en este momento distrae. Un precio, un producto. Escala después del primer cliente.</p>
+    </div>
+
+    <div class="filter-card no">
+      <div class="filter-label">✗ No aplica aún</div>
+      <h4>Lección 13 — Romper el techo de $5K/mes</h4>
+      <p>Estrategia de escala. Irrelevante hasta tener los primeros 3–5 clientes y validar que el producto resuelve el dolor.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- DOLOR VALIDADO -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Reddit Research · Dolores validados</div>
+      <h2>El dolor existe — en sus propias palabras</h2>
+    </div>
+    <span class="badge badge-mint">mercado confirmado</span>
+  </div>
+  <div class="pain-grid">
+
+    <div class="pain-card">
+      <div class="pain-source">r/learnprogramming · +2.4k upvotes</div>
+      <div class="pain-quote">"I have 23 unfinished Udemy courses. I keep buying more thinking this one will be different."</div>
+      <div class="pain-match">→ Tu dashboard resuelve exactamente esto</div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-source">r/Coursera · recurrente</div>
+      <div class="pain-quote">"Free audit has zero accountability. I need someone or something that tracks me daily."</div>
+      <div class="pain-match">→ Checklist + racha + agente IA = solución directa</div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-source">r/datascience · frecuente</div>
+      <div class="pain-quote">"I don't know if I'm on the right learning path. I just collect certificates without direction."</div>
+      <div class="pain-match">→ Rutas dinámicas + mentor IA = solución directa</div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-source">r/learnmachinelearning · top comment</div>
+      <div class="pain-quote">"The course content is the same everywhere. What you pay for is someone having figured out the sequence."</div>
+      <div class="pain-match">→ Tu sistema de fases + hitos = exactamente eso</div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-source">Notion Marketplace · descripción de producto similar</div>
+      <div class="pain-quote">"I took 13 online courses in 10 months. Taking them and completing them are two different things."</div>
+      <div class="pain-match">→ Producto similar vendió 236+ copias sin agente IA</div>
+    </div>
+
+    <div class="pain-card">
+      <div class="pain-source">Gumroad · reviews de trackers de cursos</div>
+      <div class="pain-quote">"I need something that shows me progress, tells me what to do today, and reminds me why I started."</div>
+      <div class="pain-match">→ Eso es literalmente tu MVP, palabra por palabra</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PLAN DE ACCION -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Hoja de ruta · 21 días</div>
+      <h2>Plan de primeros clientes — paso a paso</h2>
+    </div>
+    <span class="badge badge-amber">ejecutable desde el celular</span>
+  </div>
+
+  <div class="phases">
+
+    <!-- FASE 1 -->
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle">1</div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <h3>Validación con conversaciones reales</h3>
+          <span class="phase-time">Días 1–5</span>
+          <span class="badge badge-violet">semana 1</span>
+        </div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-icon">🎯</div>
+            <div class="step-body">
+              <strong>Identificar 15 personas con el dolor exacto</strong>
+              <p>En Reddit busca: "unfinished courses", "can't stay consistent studying", "overwhelmed learning AI". En grupos de Telegram/WhatsApp de Platzi, Coursera o bootcamps latinos. No vendas nada. Lleva nota de quiénes expresan el dolor en sus propias palabras.</p>
+              <div class="pill-row">
+                <span class="pill hot">r/learnprogramming</span>
+                <span class="pill hot">r/datascience</span>
+                <span class="pill hot">r/learnmachinelearning</span>
+                <span class="pill">Grupos Platzi</span>
+                <span class="pill">Discord ML Latam</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">💬</div>
+            <div class="step-body">
+              <strong>Enviar 10 mensajes directos — no de venta, de curiosidad</strong>
+              <p>Escribe solo a quien ya expresó el dolor públicamente. El DM no es frío: ellos ya "levantaron la mano".</p>
+              <div class="prompt-label">Mensaje exacto a usar</div>
+              <div class="prompt-box">Hola [nombre], vi tu comentario sobre tener cursos sin terminar. Yo construí algo que podría ayudar — un dashboard con un agente IA que te dice qué estudiar hoy según tus cursos activos. ¿Te interesaría verlo funcionar? Es gratis probarlo, solo quiero feedback.</div>
+              <p style="margin-top:8px;font-size:11px;">Meta: 5 personas que digan "sí, muéstrame".</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">📱</div>
+            <div class="step-body">
+              <strong>Demo en vivo por pantalla compartida o video de 3 min</strong>
+              <p>Muestra el dashboard funcionando en tu Samsung A32. Activa un curso → el checklist se actualiza. Agrega una fase con fecha → aparece en el radar. Pregunta al agente "¿qué estudio hoy?" Ese momento en vivo es tu mejor vendedor.</p>
+              <div class="pill-row">
+                <span class="pill hot">Screen Record nativo Android</span>
+                <span class="pill">WhatsApp video</span>
+                <span class="pill warn">No PowerPoints</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">📋</div>
+            <div class="step-body">
+              <strong>Hacer 3 preguntas clave en cada conversación</strong>
+              <p>Graba o toma nota de las respuestas exactas. Estas frases serán tu copy de ventas.</p>
+              <div class="prompt-box">1. ¿Qué es lo más frustrante de tu proceso de estudio ahora?
+2. Si tuvieras algo que te dijera qué hacer hoy, ¿lo usarías?
+3. ¿Cuánto pagarías por tener esto resuelto?</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle">2</div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <h3>Lanzamiento de oferta "Fundador"</h3>
+          <span class="phase-time">Días 6–10</span>
+          <span class="badge badge-amber">primera venta</span>
+        </div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-icon">🏷️</div>
+            <div class="step-body">
+              <strong>Crear producto en Gumroad en menos de 30 min</strong>
+              <p>Sube el archivo HTML + una guía de instalación en GitHub Pages (capturas de los pasos que ya conoces). Precio fundador: $9 USD los primeros 10 compradores, luego $19 USD.</p>
+              <div class="pill-row">
+                <span class="pill hot">gumroad.com — gratis</span>
+                <span class="pill">Nombre: "AI Learning Dashboard — instala en 10 min"</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">✍️</div>
+            <div class="step-body">
+              <strong>Copy de la página de Gumroad — en sus propias palabras</strong>
+              <p>Usa las frases que recolectaste en la Fase 1. No inventes beneficios: repite su dolor exacto.</p>
+              <div class="prompt-box">Para estudiantes que compran cursos y nunca los terminan.
+
+Un panel de control con agente IA que sabe exactamente qué estás estudiando hoy — y te dice qué hacer.
+
+✓ Checklist diario generado desde tus cursos activos
+✓ Radar de hitos y fechas de entrega
+✓ Agente IA gratuito (Gemini) que conoce tu progreso real
+✓ Funciona desde el celular
+✓ Se instala en 10 minutos, sin programar
+
+Construido por un estudiante colombiano desde un Samsung Galaxy A32. Precio fundador: $9 USD.</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">📤</div>
+            <div class="step-body">
+              <strong>Volver a las 10 conversaciones con el link directo</strong>
+              <p>A quienes mostraron interés en la demo, envía el link con el precio fundador y una fecha límite real (48h).</p>
+              <div class="prompt-box">Oye, lo publiqué. Por ser de los primeros está en $9 en lugar de $19 — hasta el viernes. Por si te interesa probarlo: [link gumroad]</div>
+              <p style="margin-top:8px;font-size:11px;">Meta: 3 primeras ventas. Con $9 cada una son $27. No es el objetivo el dinero — es la validación.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle">3</div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <h3>Primer contenido público — Built in public</h3>
+          <span class="phase-time">Días 11–16</span>
+          <span class="badge badge-mint">prueba > promesas</span>
+        </div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-icon">🎥</div>
+            <div class="step-body">
+              <strong>1 reel de 30 segundos — tu historia real</strong>
+              <p>No necesitas guión pulido. Graba con tu Samsung A32 el dashboard funcionando. Voz en off diciendo exactamente esto:</p>
+              <div class="prompt-box">Construí esto desde mi celular con $0. Es un dashboard con un agente IA que te dice qué estudiar hoy según los cursos que tienes activos. Sin Notion. Sin suscripciones. Funciona en 10 minutos. Si siempre empiezas cursos y nunca los terminas, esto es para ti. Link en bio.</div>
+              <div class="pill-row">
+                <span class="pill hot">Instagram Reels</span>
+                <span class="pill hot">TikTok</span>
+                <span class="pill">LinkedIn (versión texto)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">📌</div>
+            <div class="step-body">
+              <strong>Post en Reddit — no de venta, de valor genuino</strong>
+              <p>En r/learnprogramming o r/datascience publica el proceso de construcción, no el producto. La autenticidad genera tráfico orgánico. El link de Gumroad va en los comentarios solo si alguien pregunta.</p>
+              <div class="prompt-box">Titulo: "Construí un dashboard de seguimiento de cursos con agente IA gratuito integrado — desde mi celular Android, sin presupuesto. Aquí el proceso completo."</div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">📸</div>
+            <div class="step-body">
+              <strong>Screenshot de la primera venta — tu primera "prueba"</strong>
+              <p>Cuando llegue la primera venta, ese screenshot va directo a historias de Instagram y al post de Reddit como actualización. Eso es tu stack de prueba inicial. Promesas requieren confianza. Prueba crea confianza.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="phase">
+      <div class="phase-num">
+        <div class="phase-circle">4</div>
+      </div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <h3>Consolidar y decidir siguiente paso</h3>
+          <span class="phase-time">Días 17–21</span>
+          <span class="badge badge-rose">decisión estratégica</span>
+        </div>
+        <div class="steps">
+
+          <div class="step">
+            <div class="step-icon">📊</div>
+            <div class="step-body">
+              <strong>Medir las métricas que importan — solo estas</strong>
+              <p>Ignora views, likes y seguidores. Las únicas métricas de validación real en esta etapa son tres.</p>
+              <div class="pill-row">
+                <span class="pill hot">Conversaciones iniciadas: meta 10+</span>
+                <span class="pill hot">Demos dadas: meta 5+</span>
+                <span class="pill hot">Ventas: meta 3+ (aunque sean a $9)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-icon">🔀</div>
+            <div class="step-body">
+              <strong>Decisión basada en datos reales</strong>
+              <p>Con los resultados en mano, el camino se bifurca claramente.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="decision-box" style="margin-top:16px;">
+          <h3>¿Qué señal obtuviste?</h3>
+          <p>Basado en conversaciones + ventas de los 21 días</p>
+          <div class="decision-options">
+            <div class="d-opt a">
+              <div class="d-label">Señal fuerte ✓</div>
+              <div class="d-title">3+ ventas, feedback claro</div>
+              <div class="d-desc">Subir precio a $19, escalar contenido, construir versión personalizable para coaches (precio $150–300 USD/proyecto).</div>
+            </div>
+            <div class="d-opt b">
+              <div class="d-label">Señal débil — ajustar</div>
+              <div class="d-title">Interés pero sin compras</div>
+              <div class="d-desc">El problema es el posicionamiento, no el producto. Volver a las conversaciones y cambiar el ángulo de la oferta antes de escalar.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- POR QUÉ TU MVP GANA -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Análisis competitivo</div>
+      <h2>Por qué tu MVP supera lo que ya existe</h2>
+    </div>
+  </div>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Alternativa actual del mercado</th>
+        <th>Dolor que no resuelve</th>
+        <th>Lo que tu MVP agrega</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature">Notion tracker de cursos ($0–10)</td>
+        <td class="pain">Sin agente IA. Sin checklist dinámico. Sin racha. Manual total.</td>
+        <td class="win">Agente con contexto real + checklist automático desde cursos activos</td>
+      </tr>
+      <tr>
+        <td class="feature">Trello / Asana para estudios</td>
+        <td class="pain">No pensado para aprendizaje. Sin fechas de hitos de cursos. Sin IA.</td>
+        <td class="win">Radar de hitos + fases vinculadas + mentor que conoce tu progreso</td>
+      </tr>
+      <tr>
+        <td class="feature">Duolingo / apps de hábitos</td>
+        <td class="pain">Solo para un dominio específico. No trackea cursos externos.</td>
+        <td class="win">Funciona con cualquier plataforma: Coursera, Platzi, YouTube, Poli</td>
+      </tr>
+      <tr>
+        <td class="feature">ChatGPT como "mentor"</td>
+        <td class="pain">No sabe qué cursos tienes, tu racha, tus hitos, tu contexto real.</td>
+        <td class="win">Gemini integrado que lee tu estado real en cada respuesta</td>
+      </tr>
+      <tr>
+        <td class="feature">Spreadsheet de Excel</td>
+        <td class="pain">No es mobile-first. No tiene IA. Alta fricción manual.</td>
+        <td class="win">100% móvil, sin fricción, progreso calculado solo</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- MÉTRICAS DE ÉXITO -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">KPIs · 21 días</div>
+      <h2>Métricas de validación real</h2>
+    </div>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="m-num">10</div>
+      <div class="m-label">Conversaciones directas iniciadas</div>
+      <div class="m-desc">No posts. DMs reales a personas con el dolor.</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">5</div>
+      <div class="m-label">Demos en vivo del dashboard</div>
+      <div class="m-desc">Pantalla compartida o video de 3 min funcionando.</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">3+</div>
+      <div class="m-label">Ventas reales (a cualquier precio)</div>
+      <div class="m-desc">Aunque sean $9. Esto prueba demanda, no volumen.</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">2</div>
+      <div class="m-label">Testimonios de uso real</div>
+      <div class="m-desc">Screenshots de alguien usando el dashboard. Tu stack de prueba.</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">1</div>
+      <div class="m-label">Post de "built in public" publicado</div>
+      <div class="m-desc">Reddit o LinkedIn. Tu historia = tu contenido más potente.</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">$27</div>
+      <div class="m-label">Ingreso mínimo de validación</div>
+      <div class="m-desc">3 ventas × $9. No es el objetivo — es la prueba de que el dolor es real y pagable.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LO QUE NO HACER -->
+<div class="section">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Errores del video · filtro final</div>
+      <h2>Lo que NO hacer en esta etapa</h2>
+    </div>
+    <span class="badge badge-rose">evitar ahora</span>
+  </div>
+  <div class="filter-grid">
+    <div class="filter-card no">
+      <div class="filter-label">✗ No hacer</div>
+      <h4>Construir el perfil de Instagram antes de tener 1 venta</h4>
+      <p>El video lo dice bien: Instagram primero solo si el contenido ya es específico. Sin validación previa, es tiempo perdido.</p>
+    </div>
+    <div class="filter-card no">
+      <div class="filter-label">✗ No hacer</div>
+      <h4>Agregar más features al dashboard antes de vender</h4>
+      <p>Ya tienes agente IA, fases, checklist dinámico, cronómetro. El producto está listo. Lo que falta es el cliente, no más código.</p>
+    </div>
+    <div class="filter-card no">
+      <div class="filter-label">✗ No hacer</div>
+      <h4>Poner garantía de devolución en el precio de $9</h4>
+      <p>El video lo confirma: las garantías en 2026 hacen daño. Tu prueba es la demo en vivo, no una promesa.</p>
+    </div>
+    <div class="filter-card no">
+      <div class="filter-label">✗ No hacer</div>
+      <h4>Esperar a tener todo "perfecto" para publicar en Gumroad</h4>
+      <p>"Un listing al 80% publicado hoy supera a uno perfecto que no existe." — El video, lección 4.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer">
+  Plan de validación MVP · Dashboard IA Growth · Luis Roman + Claude · Julio 2026<br>
+  Basado en: 13 lecciones del video + investigación Reddit + conocimiento PLR + contexto del producto real
+</div>
+
+</body>
+</html>
